@@ -1,5 +1,10 @@
+/// <reference types="./types/sessionExtTypes.d.ts" />
+
 import express, { Request, Response } from "express";
-import session from "express-session";
+import session, { type SessionOptions } from "express-session";
+import passport from "passport";
+
+import "dotenv/config";
 
 
 const app = express();
@@ -22,11 +27,17 @@ app.use(
   })
 );
 
+app.use(passport.initialize());
+app.use(passport.session());
 
+
+// type IExtra = Request & { extra?: boolean };
 
 
 
 app.get("/", (req: Request, res: Response) => {
+  console.log(process.env.COOKIE_SECRET_NAME ?? "Please set a cookie secret in .env file!!!");
+  
   res.send(`<h1>Session demo</h1><p>Visit /set, /get, /touch, /destroy</p>`);
 });
 
