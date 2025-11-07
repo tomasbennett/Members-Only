@@ -1,4 +1,4 @@
-/// <reference types="./types/sessionExtTypes.d.ts" />
+/// <reference path="./types/sessionExtTypes.d.ts" />
 
 import express, { Request, Response } from "express";
 import session, { type SessionOptions } from "express-session";
@@ -37,7 +37,7 @@ app.use(passport.session());
 
 app.get("/", (req: Request, res: Response) => {
   console.log(process.env.COOKIE_SECRET_NAME ?? "Please set a cookie secret in .env file!!!");
-  
+
   res.send(`<h1>Session demo</h1><p>Visit /set, /get, /touch, /destroy</p>`);
 });
 
