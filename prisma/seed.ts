@@ -8,6 +8,7 @@ const defaultUsers: Prisma.UsersCreateInput[] = [
     {
         username: 'admin',
         password: process.env.ADMIN_PASSWORD || "default_admin_password_123",
+        member: true,
         posts: {
             create: [
                 {
@@ -24,6 +25,7 @@ const defaultUsers: Prisma.UsersCreateInput[] = [
     {
         username: 'tb1',
         password: process.env.SECOND_USER_PASSWORD || "default_user_password_123",
+        member: false,
         posts: {
             create: [
                 {
