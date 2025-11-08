@@ -1,34 +1,73 @@
-import { PrismaClient } from "@prisma/client";
+import "dotenv/config";
+
+import { Prisma, PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 
-async function defaultInsert() {
-    await prisma.user.deleteMany();
+const defaultUsers: Prisma.UsersCreateInput[] = [
+    {
+        username: 'admin',
+        password: process.env.ADMIN_PASSWORD || "default_admin_password_123",
+        posts: {
+            create: [
+                {
+                    title: "This is the first post for this site!!!",
+                    body: "This is the message body for the very first post..."
+                },
+                {
+                    title: "Second here...",
+                    body: "Just making things up now for speed purposes!!!"
+                }
+            ]
+        }
+    },
+    {
+        username: 'tb1',
+        password: process.env.SECOND_USER_PASSWORD || "default_user_password_123",
+        posts: {
+            create: [
+                {
+                    title: "I am a secondary default user",
+                    body: "And this is my message..."
+                },
+                {
+                    title: "Random Message here!!!",
+                    body: "Pterodactylane"
+                }
+            ]
+        }
+    }
+]
 
-    await prisma.user.createMany({
-        data: [
-            {
-                name: "Pat the gamer",
-                email: "a"
-            },
-            {
-                name: "default3",
-                email: "b"
-            },
-            {
-                name: "instant eyes",
-                email: "c"
-            },
-            {
-                name: "lego",
-                email: "d"
-            },
-            {
-                name: "Harry",
-                email: "e"
-            }
-        ]
-    });
+
+
+async function defaultInsert() {
+    // await prisma.user.deleteMany();
+
+    for (const user of defaultUsers) {
+        await prisma.users.create({
+            data: user
+        });
+    }
+
+    // await prisma.users.create({
+    //     data: {
+    //         username: 'admin',
+    //         password: process.env.ADMIN_PASSWORD || "default_admin_password_123",
+    //         posts: {
+    //             create: [
+    //                 {
+    //                     title: "This is the first post for this site!!!",
+    //                     body: "This is the message body for the very first post..."
+    //                 },
+    //                 {
+    //                     title: "Second here...",
+    //                     body: "Just making things up now for speed purposes!!!"
+    //                 }
+    //             ]
+    //         }
+    //     }
+    // });
 }
 
 
