@@ -9,18 +9,23 @@ async function defaultInsert() {
         data: [
             {
                 name: "Pat the gamer",
+                email: "a"
             },
             {
-                name: "default3"
+                name: "default3",
+                email: "b"
             },
             {
-                name: "instant eyes"
+                name: "instant eyes",
+                email: "c"
             },
             {
-                name: "lego"
+                name: "lego",
+                email: "d"
             },
             {
-                name: "Harry"
+                name: "Harry",
+                email: "e"
             }
         ]
     });
