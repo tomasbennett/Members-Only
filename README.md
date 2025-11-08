@@ -1,2 +1,2 @@
-# Express-Default-Template
-This will be a default template for all Express projects.
+# Members Only
+This will be a members only web application from express set to prevent non-member users from seeing other users names on their posts.
