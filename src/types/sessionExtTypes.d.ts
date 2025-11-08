@@ -1,10 +1,12 @@
+import { Users } from "@prisma/client";
 import * as express from "express";
 
 
 declare global {
     namespace Express {
         interface Request {
-            locale: "en" | "sp" | "ar"
+            locale: "en" | "sp" | "ar",
+            user?: Users
         }
     }
 }
