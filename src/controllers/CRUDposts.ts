@@ -1,9 +1,9 @@
-import { Request, Response, NextFunction } from "express";
+// import { Request, Response, NextFunction } from "express";
 
-export function ensureAuthentication(req: Request, res: Response, next: NextFunction) {
-    if (req.isAuthenticated && req.isAuthenticated()) {
-        return next();
-    }
+// export function ensureAuthentication(req: Request, res: Response, next: NextFunction) {
+//     if (req.isAuthenticated && req.isAuthenticated()) {
+//         return next();
+//     }
 
-    return res.redirect("/login");
-}
+//     return res.redirect("/login");
+// }
