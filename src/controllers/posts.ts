@@ -7,7 +7,7 @@ import { prisma } from "../db/prisma";
 import { HTTPError } from "../errors/httpErrors";
 
 
-const router = Router();
+export const router = Router();
 
 
 router.get("/", ensureAuthentication, async (req: Request, res: Response, next: NextFunction) => {
@@ -18,7 +18,10 @@ router.get("/", ensureAuthentication, async (req: Request, res: Response, next: 
             include: { user: includeUser }
         });
 
-        return res.status(200).render("/posts", { posts: allPosts });
+        return res.status(200).render("posts", { 
+            title: "All Posts",
+            posts: allPosts 
+        });
 
     } catch (err) {
         return next(err);
@@ -28,23 +31,24 @@ router.get("/", ensureAuthentication, async (req: Request, res: Response, next: 
 
 router.get("/:id", async (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
     const id: number = Number(req.params.id);
-
+    
     if (isNaN(id)) {
         const err: HTTPError = new HTTPError("Post ID must be a number", 400);
         err.name = "Bad Request";
         return next(err);
     }
-
+    
     if (id !== Math.floor(id)) {
         const err: HTTPError = new HTTPError("Post ID must be an Integer", 400);
         err.name = "Bad Request";
         return next(err);
     }
-
+    
     try {
+        console.log("we made it this far");
         const isMember: boolean = req.user?.member ?? false;
 
-        const post = await prisma.posts.findFirst({
+        const post = await prisma.posts.findMany({
             where: {
                 id: id
             },
@@ -53,7 +57,13 @@ router.get("/:id", async (req: Request<{ id: string }>, res: Response, next: Nex
             }
         });
 
-        return res.status(200).render("/posts", { posts: post })
+
+        console.log(post);
+
+        return res.status(200).render("posts", { 
+            title: "Single Post ID",
+            posts: post
+        });
 
     } catch (err) {
         return next(err);

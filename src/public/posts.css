@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+
+
+h1 {
+    margin-bottom: 2rem;
+}
+
+.post {
+    width: 100%;
+    max-width: 60rem;
+    min-width: 30rem;
+
+    border: .1rem solid #ccc;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: .6rem;
+
+    box-shadow: .5rem .5rem 1rem rgba(0, 0, 0, 0.6);
+
+    /* cursor: pointer; */
+
+    transition: transform 1s ease;
+}
+
+.post:hover{
+    transform: scale(1.1);
+}
+
+
+.post-title {
+    font-size: 1.3rem;
+    margin-bottom: .8rem;
+
+    font-weight: bolder;
+}
+
+.post-body {
+    margin-bottom: 1.2rem;
+}
+
+.post-author {
+    color: #666;
+    font-size: 1rem;
+}

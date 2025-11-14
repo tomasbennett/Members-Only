@@ -6,4 +6,5 @@ export function ensureAuthentication(req: Request, res: Response, next: NextFunc
     }
 
     return res.redirect("/login");
+    // return next();
 }

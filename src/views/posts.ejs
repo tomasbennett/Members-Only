@@ -1,0 +1,37 @@
+<h1><%= title %></h1>
+
+<% if (posts && posts.length > 0) { %>
+
+    <% posts.forEach(post => { %>
+        <div class="post">
+            <div class="post-title">
+                <%= post.title %>
+            </div>
+
+            <div class="post-body">
+                <%= post.body %>
+            </div>
+
+            <div class="post-author">
+                Posted by: 
+                <%= (post.user && post.user.username) ? post.user.username : "Anonymous" %>
+            </div>
+        </div>
+    <% }) %>
+
+<% } else { %>
+    <p>No posts available.</p>
+<% } %>
+
+
+
+
+
+
+
+<%- contentFor('pageTitle') %>
+<title>Posts Page</title>
+
+
+<%- contentFor('styleSheets') %>
+<link rel="stylesheet" href="/posts.css">
