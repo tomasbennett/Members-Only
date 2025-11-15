@@ -6,6 +6,13 @@ body {
     align-items: center;
 }
 
+.error-message {
+    color: red;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+
 .login-container {
     background-color: #1f1f1f; /* dark container */
     padding: 2.5rem;
