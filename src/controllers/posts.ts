@@ -83,9 +83,9 @@ router.get("/:id", async (req: Request<{ id: string }>, res: Response, next: Nex
 router.use(async (err: HTTPError, req: Request, res: Response, next: NextFunction) => {
     console.error(err);
 
-    return res.status(err.statusCode || 500).send(`
-        Error Occurred: ${err.name || "Internal server error"}
-        ERROR: ${err.message}
+    return res.status(err?.statusCode ?? 500).send(`
+        Error Occurred: ${err?.name ?? "Internal server error"}
+        ERROR: ${err?.message ?? "Undefined message given"}
         `);
 
 });

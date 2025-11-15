@@ -18,6 +18,7 @@
   "description": "",
   "dependencies": {
     "@prisma/client": "^6.18.0",
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.2.3",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
@@ -25,9 +26,11 @@
     "express-session": "^1.18.2",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "prisma": "^6.18.0"
+    "prisma": "^6.18.0",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/ejs": "^3.1.5",
     "@types/express": "^5.0.5",
     "@types/express-ejs-layouts": "^2.5.4",

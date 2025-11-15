@@ -3,7 +3,7 @@
 <% if (posts && posts.length > 0) { %>
 
     <% posts.forEach(post => { %>
-        <div class="post">
+        <div class="post" onclick="window.location.href='/posts/<%= post.id %>'">
             <div class="post-title">
                 <%= post.title %>
             </div>

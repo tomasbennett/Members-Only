@@ -1,0 +1,22 @@
+<div class="login-container">
+    <h1>Member passcode</h1>
+
+    <form action="members-passcode" method="POST">
+        <div class="input-group">
+            <label for="username">Member secret password</label>
+            <input placeholder="Please enter the secret passcode here..." required minlength="1" type="text" id="passcode" name="passcode" />
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+
+
+
+<%- contentFor('pageTitle') %>
+<title>Member Page</title>
+
+
+<%- contentFor('styleSheets') %>
+<link rel="stylesheet" href="/login.css">
