@@ -1,21 +1,45 @@
-
 <div class="login-container">
     <h1><%= title %></h1>
+
     <% if (typeof error !== 'undefined' && error) { %>
         <div class="error-message"><%= error %></div>
     <% } %>
 
     <form action="<%= formAction %>" method="POST">
-        <div class="input-group">
-            <label for="username">Username</label>
-            <input placeholder="Please enter your username here..." maxlength="40" required minlength="1" type="text" id="username" name="username" />
-        </div>
 
         <div class="input-group">
-            <label for="password">Password</label>
-            <input placeholder="Please enter your password here..." maxlength="40" required minlength="1" type="password" id="password" name="password" />
+            <label for="<%= typeof usernameName !== 'undefined' ? usernameName : 'username' %>">
+                <%= typeof usernameLabel !== 'undefined' ? usernameLabel : 'Username' %>
+            </label>
+            <input
+                type="text"
+                id="<%= typeof usernameName !== 'undefined' ? usernameName : 'username' %>"
+                name="<%= typeof usernameName !== 'undefined' ? usernameName : 'username' %>"
+                minlength="1"
+                maxlength="40"
+                required
+                placeholder="<%= typeof usernamePlaceholder !== 'undefined' ? usernamePlaceholder : 'Please enter your username here...' %>"
+            />
         </div>
-
+        <% const showSecond = (typeof showSecondPassword === "undefined") ? true : showSecondPassword; %>
+        
+        <% if (showSecond) { %>
+            <div class="input-group">
+                <label for="<%= typeof passwordName !== 'undefined' ? passwordName : 'password' %>">
+                    <%= typeof passwordLabel !== 'undefined' ? passwordLabel : 'Password' %>
+                </label>
+            
+                <input
+                    type="<%= typeof passwordType !== 'undefined' ? passwordType : 'password' %>"
+                    id="<%= typeof passwordName !== 'undefined' ? passwordName : 'password' %>"
+                    name="<%= typeof passwordName !== 'undefined' ? passwordName : 'password' %>"
+                    minlength="1"
+                    maxlength="40"
+                    required
+                    placeholder="<%= typeof passwordPlaceholder !== 'undefined' ? passwordPlaceholder : 'Please enter your password here...' %>"
+                />
+            </div>            
+        <% } %>
         <button type="submit">Submit</button>
     </form>
 
@@ -26,12 +50,8 @@
     </div>
 </div>
 
-
-
-
 <%- contentFor('pageTitle') %>
-<title>Sign In</title>
-
+<title><%= title %></title>
 
 <%- contentFor('styleSheets') %>
 <link rel="stylesheet" href="/login.css">

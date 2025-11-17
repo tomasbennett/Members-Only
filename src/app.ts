@@ -14,6 +14,7 @@ import expressLayouts from "express-ejs-layouts";
 import { ensureAuthentication } from "./services/ensureAuthentication";
 
 import "./services/passwordConfig"
+import { router as createPostsRouter } from "./controllers/CRUDposts";
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -84,6 +85,7 @@ app.get("/", ensureAuthentication, (req, res, next) => {
 });
 
 app.use("/posts", postsRouter);
+app.use("/create-post", createPostsRouter)
 app.use("/", loginRouter);
 
 
