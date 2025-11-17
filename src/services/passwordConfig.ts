@@ -4,65 +4,17 @@ import passport from "passport";
 import { prisma } from "../db/prisma";
 import { usernamepasswordSchema } from "../models/usernamepasswordSchema";
 
-export default function configurePassport() {
-
-    passport.use(
-        new LocalStrategy(async (username, password, done) => {
-
-            const usernameResult = usernamepasswordSchema.safeParse(username);
-            if (!usernameResult.success) {
-                const msg = usernameResult.error.issues[0].message;
-                return done(null, false, { message: msg });
-            }
-
-            const passwordResult = usernamepasswordSchema.safeParse(password);
-            if (!passwordResult.success) {
-                const msg = passwordResult.error.issues[0].message;
-                return done(null, false, { message: msg });
-            }
-
-
-            try {
-                const user = await prisma.users.findFirst({
-                    where: {
-                        username: username
-                    }
-                });
-
-                if (!user) {
-                    return done(null, false, {
-                        message: "No username found!!!"
-                    });
-                }
-
-                const match = await bcrypt.compare(password, user.password);
-
-                if (!match) {
-                    return done(null, false, {
-                        message: "Incorrect password!!!"
-                    });
-                }
-
-                return done(null, user);
-
-
-            } catch (err) {
-                return done(err);
-
-            }
 
 
 
+passport.serializeUser((user: any, done) => {
+    console.log("serialising user:", user);
+    done(null, user.id);
+});
 
-        })
-    );
+passport.deserializeUser(async (id: number, done) => {
 
-    passport.serializeUser((user: any, done) => {
-        done(null, user.id);
-    });
-
-    // 3. Deserialize user → take id from session and get full user object
-    passport.deserializeUser(async (id: number, done) => {
+    try {
         const user = await prisma.users.findFirst({
             where: {
                 id: id
@@ -70,10 +22,77 @@ export default function configurePassport() {
         });
 
         if (user) {
-            done(null, user)
+            done(null, user);
+
         } else {
-            done(null, false)
+            done(null, false);
+
         }
 
-    });
-}
+
+    } catch (err) {
+        console.log(err);
+
+    }
+
+
+});
+
+
+export default passport.use(
+    "local",
+    new LocalStrategy(async (username, password, done) => {
+
+        const usernameTrim: string = username.trim();
+        const usernameResult = usernamepasswordSchema.safeParse(usernameTrim);
+        if (!usernameResult.success) {
+            const msg = usernameResult.error.issues[0].message;
+            return done(null, false, { message: msg });
+        }
+
+        const passwordTrim: string = password.trim();
+        const passwordResult = usernamepasswordSchema.safeParse(passwordTrim);
+        if (!passwordResult.success) {
+            const msg = passwordResult.error.issues[0].message;
+            return done(null, false, { message: msg });
+        }
+
+
+        try {
+            const user = await prisma.users.findFirst({
+                where: {
+                    username: usernameTrim
+                }
+            });
+
+            console.log("user has been found", user);
+
+            if (!user) {
+                return done(null, false, {
+                    message: "No username found!!!"
+                });
+            }
+
+
+            const match = await bcrypt.compare(passwordTrim, user.password);
+
+            if (!match) {
+                return done(null, false, {
+                    message: "Incorrect password!!!"
+                });
+            }
+
+            return done(null, user);
+
+
+        } catch (err) {
+            return done(err);
+
+        }
+
+
+
+
+    })
+);
+

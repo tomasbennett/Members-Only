@@ -13,7 +13,7 @@ import { router as loginRouter } from "./controllers/authentication";
 import expressLayouts from "express-ejs-layouts";
 import { ensureAuthentication } from "./services/ensureAuthentication";
 
-
+import "./services/passwordConfig"
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -91,6 +91,5 @@ app.use("/", loginRouter);
 
 app.listen(3000, () => { 
   console.log("Views path:", app.get("views"));
-  console.log("Listening on http://localhost:3000"); 
-
+  console.log("Listening on http://localhost:3000");
 });

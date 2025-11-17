@@ -1,20 +1,19 @@
 
 <div class="login-container">
     <h1><%= title %></h1>
-
-    <% if (error) { %>
+    <% if (typeof error !== 'undefined' && error) { %>
         <div class="error-message"><%= error %></div>
     <% } %>
 
     <form action="<%= formAction %>" method="POST">
         <div class="input-group">
             <label for="username">Username</label>
-            <input placeholder="Please enter your username here..." required minlength="1" type="text" id="username" name="username" />
+            <input placeholder="Please enter your username here..." maxlength="40" required minlength="1" type="text" id="username" name="username" />
         </div>
 
         <div class="input-group">
             <label for="password">Password</label>
-            <input placeholder="Please enter your password here..." required minlength="1" type="password" id="password" name="password" />
+            <input placeholder="Please enter your password here..." maxlength="40" required minlength="1" type="password" id="password" name="password" />
         </div>
 
         <button type="submit">Submit</button>

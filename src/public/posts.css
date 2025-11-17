@@ -6,9 +6,64 @@ body {
 }
 
 
-
-h1 {
+.header-container{
+    width: 100%;
+    
     margin-bottom: 2rem;
+
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    column-gap: 2rem;
+
+    padding: 0 0;
+}
+
+.svg-container{
+    flex-shrink: 0;
+
+    aspect-ratio: 1;
+    width: 5rem;
+
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition: background-color 300ms linear;
+}
+
+
+.svg-container:nth-child(3){
+    margin-left: auto;
+}
+
+
+
+
+.svg-container:hover{
+    background-color: rgba(134, 134, 134, 0.3);
+}
+
+
+
+
+
+
+.svg-container > svg{
+    fill: white;
+
+    width: 60%;
+
+    object-fit: cover;
+
+    overflow: hidden;
 }
 
 .post {

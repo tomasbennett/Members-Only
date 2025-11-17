@@ -29,7 +29,7 @@ router.get("/", ensureAuthentication, async (req: Request, res: Response, next: 
     }
 });
 
-router.get("/:id", async (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
+router.get("/:id", ensureAuthentication, async (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
     const id: number = Number(req.params.id);
     
     if (isNaN(id)) {
@@ -45,7 +45,6 @@ router.get("/:id", async (req: Request<{ id: string }>, res: Response, next: Nex
     }
     
     try {
-        console.log("we made it this far");
         const isMember: boolean = req.user?.member ?? false;
 
         const post = await prisma.posts.findMany({
@@ -56,9 +55,6 @@ router.get("/:id", async (req: Request<{ id: string }>, res: Response, next: Nex
                 user: isMember
             }
         });
-
-
-        console.log(post);
 
         return res.status(200).render("posts", { 
             title: "Single Post ID",
@@ -80,7 +76,7 @@ router.get("/:id", async (req: Request<{ id: string }>, res: Response, next: Nex
 
 
 
-router.use(async (err: HTTPError, req: Request, res: Response, next: NextFunction) => {
+router.use(ensureAuthentication, async (err: HTTPError, req: Request, res: Response, next: NextFunction) => {
     console.error(err);
 
     return res.status(err?.statusCode ?? 500).send(`
