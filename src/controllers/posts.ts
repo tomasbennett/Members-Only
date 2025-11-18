@@ -19,6 +19,8 @@ router.get("/", ensureAuthentication, async (req: Request, res: Response, next: 
         });
 
         return res.status(200).render("posts", { 
+            member: req.user!.member,
+
             title: "All Posts",
             posts: allPosts 
         });
@@ -56,7 +58,9 @@ router.get("/:id", ensureAuthentication, async (req: Request<{ id: string }>, re
             }
         });
 
-        return res.status(200).render("posts", { 
+        return res.status(200).render("posts", {
+            member: req.user!.member,
+
             title: "Single Post ID",
             posts: post
         });

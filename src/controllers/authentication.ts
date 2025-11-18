@@ -171,7 +171,7 @@ router.post("/signup", ensureUnauthenticated, async (req: Request<{}, {}, {
 
 
 
-router.use(async (err: HTTPError, req: Request, res: Response, next: NextFunction) => {
+router.use((err: HTTPError, req: Request, res: Response, next: NextFunction) => {
     
     console.error(err);
 

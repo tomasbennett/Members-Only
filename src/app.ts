@@ -15,6 +15,7 @@ import { ensureAuthentication } from "./services/ensureAuthentication";
 
 import "./services/passwordConfig"
 import { router as createPostsRouter } from "./controllers/CRUDposts";
+import { router as membersRouter } from "./controllers/members";
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -85,7 +86,8 @@ app.get("/", ensureAuthentication, (req, res, next) => {
 });
 
 app.use("/posts", postsRouter);
-app.use("/create-post", createPostsRouter)
+app.use("/create-post", createPostsRouter);
+app.use("/members-only", membersRouter);
 app.use("/", loginRouter);
 
 
