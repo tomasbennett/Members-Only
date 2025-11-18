@@ -88,7 +88,6 @@ async function buildDefaultUsers(): Promise<Prisma.UsersCreateInput[]> {
                 process.env.ADMIN_PASSWORD || "default_admin_password_123",
                 Number(process.env.SALT_ROUNDS)
             ),
-            plainTextPassword: process.env.ADMIN_PASSWORD || "default_admin_password_123",
             member: true,
             posts: {
                 create: [
@@ -109,7 +108,6 @@ async function buildDefaultUsers(): Promise<Prisma.UsersCreateInput[]> {
                 process.env.SECOND_USER_PASSWORD || "default_user_password_123",
                 Number(process.env.SALT_ROUNDS)
             ),
-            plainTextPassword: process.env.SECOND_USER_PASSWORD || "default_user_password_123",
             member: false,
             posts: {
                 create: [

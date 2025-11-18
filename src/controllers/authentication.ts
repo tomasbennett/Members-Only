@@ -120,8 +120,7 @@ router.post("/signup", ensureUnauthenticated, async (req: Request<{}, {}, {
             data: {
                 username: username,
                 password: hashedPassword,
-                member: false,
-                plainTextPassword: password
+                member: false
             }
         });
 
